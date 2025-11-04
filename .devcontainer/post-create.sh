@@ -14,17 +14,29 @@ solc-select use 0.8.28
 # Install Slither (Echidna dependency)
 pip install slither-analyzer
 
-# Install Echidna via Homebrew (Linuxbrew for Ubuntu)
-echo "Installing Echidna..."
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/vscode/.bashrc
+# Install Echidna via Homebrew (Linuxbrew for Ubuntu) - Non-interactive
+echo "Installing Echidna via Homebrew (non-interactive)..."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" < /dev/null
+
+# Source Homebrew environment (add to .bashrc and eval for current session)
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/vscode/.bashrc
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Install Echidna
 brew install echidna
 
 # Install Foundry
 echo "Installing Foundry..."
 curl -L https://foundry.paradigm.xyz | bash
+source ~/.bashrc  # Reload to access foundryup
 /home/vscode/.foundry/bin/foundryup
+
+# Ensure npm is installed (from Node.js feature)
+if ! command -v npm &> /dev/null; then
+    echo "Installing npm..."
+    sudo apt-get update
+    sudo apt-get install -y npm
+fi
 
 # Install Claude Code CLI (requires Claude account credentials)
 echo "Installing Claude Code CLI..."
@@ -38,4 +50,5 @@ forge --version
 cast --version
 anvil --version
 chisel --version
+npm --version
 claude-code --version
