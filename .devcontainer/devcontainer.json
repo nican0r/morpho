@@ -1,0 +1,26 @@
+{
+    "name": "Ethereum Development Environment",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "20"
+        },
+        "ghcr.io/devcontainers/features/rust:1": {},
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.11"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "ms-python.python",
+                "rust-lang.rust-analyzer",
+                "haskell.haskell",
+                "JuanBlanco.solidity"
+            ]
+        }
+    },
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    "remoteUser": "vscode"
+}
