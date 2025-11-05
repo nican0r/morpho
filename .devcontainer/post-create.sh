@@ -6,6 +6,10 @@ echo "Installing dependencies for Echidna..."
 sudo apt-get update
 sudo apt-get install -y libreadline-dev libsecp256k1-dev
 
+# Install lcov (for coverage analysis)
+echo "Installing lcov for coverage analysis..."
+sudo apt-get install -y lcov
+
 # Install solc-select (for Solidity compiler management)
 pip install solc-select
 solc-select install 0.8.28
@@ -46,6 +50,7 @@ echo "Claude Code CLI installed. Please run 'claude-code login' to authenticate.
 # Verify installations
 echo "Verifying installations..."
 echidna --version
+lcov --version
 forge --version
 cast --version
 anvil --version
