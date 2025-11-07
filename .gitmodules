@@ -7,3 +7,7 @@
 [submodule ".claude"]
 	path = .claude
 	url = https://github.com/Recon-Fuzz/ai-agent-primers
+[submodule ".opencode"]
+	path = .opencode
+	url = https://github.com/Recon-Fuzz/ai-agent-primers
+	branch = feat/improve-coverage-workflows-2
