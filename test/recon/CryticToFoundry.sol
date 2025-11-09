@@ -7,13 +7,15 @@ import "forge-std/console2.sol";
 
 import {Test} from "forge-std/Test.sol";
 import {TargetFunctions} from "./TargetFunctions.sol";
-import {Authorization, Signature, Position} from "src/interfaces/IMorpho.sol";
+import {Authorization, Signature, Position, MarketParams, Id} from "src/interfaces/IMorpho.sol";
 import {ORACLE_PRICE_SCALE} from "src/libraries/ConstantsLib.sol";
+import {MarketParamsLib} from "src/libraries/MarketParamsLib.sol";
 import {IMorphoFlashLoanCallback} from "src/interfaces/IMorphoCallbacks.sol";
 
 
 // forge test --match-contract CryticToFoundry -vv
 contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashLoanCallback {
+    using MarketParamsLib for MarketParams;
     // Flash loan callback implementation
     function onMorphoFlashLoan(uint256 assets, bytes calldata data) external {
         // Approve the flash loaned assets to be repaid
@@ -31,20 +33,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         // TODO: add failing property tests here for debugging
     }
 
-    // Test 1: morpho_flashLoan - no prerequisite
-    function test_morpho_flashLoan() public {
-        // Flash loans require liquidity in Morpho
-        // First supply some liquidity to the protocol
-        uint256 supplyAmount = 10000e18;
-        morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
-
-        // Now flash loan a small amount
-        // Pass the token address as data for the callback
-        bytes memory data = abi.encode(address(loanToken));
-        morpho_flashLoan(address(loanToken), 1e18, data);
-    }
-
-    // Test 2: morpho_setAuthorization - no prerequisite
+    // Test 1: morpho_setAuthorization - no prerequisite
     function test_morpho_setAuthorization() public {
         // Get second actor to authorize
         address authorized = _getActors()[0];
@@ -62,7 +51,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(!morpho.isAuthorized(_getActor(), authorized), "Authorization should be false");
     }
 
-    // Test 3: morpho_setAuthorizationWithSig - no prerequisite
+    // Test 2: morpho_setAuthorizationWithSig - no prerequisite
     function test_morpho_setAuthorizationWithSig() public {
         // This test requires creating a valid signature
         // For now, we'll skip this as it requires setting up proper EIP-712 signatures
@@ -92,6 +81,29 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         } catch {
             // Expected to revert with invalid signature
         }
+    }
+
+// Test 3: morpho_createMarket - no prerequisite (IRM and LLTV already enabled in setup)
+    function test_morpho_createMarket() public {
+        // Create a new market with different parameters
+        // Use a different LLTV to create a unique market
+        MarketParams memory newMarketParams = MarketParams({
+            loanToken: address(loanToken),
+            collateralToken: address(collateralToken),
+            oracle: address(oracle),
+            irm: address(irm),
+            lltv: 0.5e18 // Different LLTV from default market
+        });
+
+        // Create the market
+        morpho_createMarket(newMarketParams);
+
+        // Verify the market exists by checking if we can accrue interest on it
+        // This will only work if the market exists
+        morpho_accrueInterest(newMarketParams);
+        
+        // If we get here without reverting, the market was created successfully
+        // The test passes
     }
 
     // Test 4: morpho_accrueInterest - requires market (already created in setup)
@@ -125,7 +137,20 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(collateral > 0, "Collateral should be greater than 0");
     }
 
-    // Test 7: morpho_withdraw - requires supply first
+    // Test 7: morpho_flashLoan - requires market created first and available liquidity
+    function test_morpho_flashLoan() public {
+        // Flash loans require liquidity in Morpho
+        // First supply some liquidity to the protocol
+        uint256 supplyAmount = 10000e18;
+        morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
+
+        // Now flash loan a small amount
+        // Pass the token address as data for the callback
+        bytes memory data = abi.encode(address(loanToken));
+        morpho_flashLoan(address(loanToken), 1e18, data);
+    }
+
+    // Test 8: morpho_withdraw - requires supply first
     function test_morpho_withdraw() public {
         uint256 supplyAmount = 1000e18;
         uint256 withdrawAmount = 500e18;
@@ -141,7 +166,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(supplyShares > 0, "Should still have some supply shares");
     }
 
-    // Test 8: morpho_withdrawCollateral - requires supplyCollateral first
+    // Test 9: morpho_withdrawCollateral - requires supplyCollateral first
     function test_morpho_withdrawCollateral() public {
         uint256 collateralAmount = 1000e18;
         uint256 withdrawAmount = 500e18;
@@ -157,7 +182,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(collateral > 0, "Should still have some collateral");
     }
 
-    // Test 10: morpho_borrow - requires market, supply (for liquidity), and supplyCollateral
+    // Test 11: morpho_borrow - requires market, supply (for liquidity), and supplyCollateral
     function test_morpho_borrow() public {
         uint256 supplyAmount = 10000e18;
         uint256 collateralAmount = 10000e18;
@@ -180,7 +205,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(borrowShares > 0, "Borrow shares should be greater than 0");
     }
 
-    // Test 9: morpho_repay - requires borrow first
+    // Test 10: morpho_repay - requires borrow first
     function test_morpho_repay() public {
         uint256 supplyAmount = 10000e18;
         uint256 collateralAmount = 10000e18;
@@ -205,7 +230,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(borrowShares > 0, "Should still have some borrow shares");
     }
 
-    // Test 11: morpho_liquidate - requires unhealthy position
+    // Test 12: morpho_liquidate - requires unhealthy position
     function test_morpho_liquidate() public {
         uint256 supplyAmount = 10000e18;
         uint256 collateralAmount = 10000e18;
