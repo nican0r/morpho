@@ -7,19 +7,21 @@ import "forge-std/console2.sol";
 
 import {Test} from "forge-std/Test.sol";
 import {TargetFunctions} from "./TargetFunctions.sol";
-import {Authorization, Signature, Position} from "src/interfaces/IMorpho.sol";
+import {Authorization, Signature, Position, MarketParams, Id} from "src/interfaces/IMorpho.sol";
 import {ORACLE_PRICE_SCALE} from "src/libraries/ConstantsLib.sol";
 import {IMorphoFlashLoanCallback} from "src/interfaces/IMorphoCallbacks.sol";
 
 
 // forge test --match-contract CryticToFoundry -vv
 contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashLoanCallback {
+    
     // Flash loan callback implementation
     function onMorphoFlashLoan(uint256 assets, bytes calldata data) external {
         // Approve the flash loaned assets to be repaid
         address token = abi.decode(data, (address));
         loanToken.approve(address(morpho), assets);
     }
+    
     function setUp() public {
         setup();
 
@@ -31,17 +33,23 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         // TODO: add failing property tests here for debugging
     }
 
-    // Test 1: morpho_flashLoan - no prerequisite
-    function test_morpho_flashLoan() public {
-        // Flash loans require liquidity in Morpho
-        // First supply some liquidity to the protocol
-        uint256 supplyAmount = 10000e18;
-        morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
+    // Test 1: morpho_createMarket - no prerequisite
+    function test_morpho_createMarket() public {
+        // Create a new market with different parameters
+        MarketParams memory newMarketParams = MarketParams({
+            loanToken: address(collateralToken),     // Swap loan and collateral
+            collateralToken: address(loanToken),      // Swap loan and collateral  
+            oracle: address(oracle),
+            irm: address(irm),
+            lltv: 0.5e18  // Different LLTV
+        });
 
-        // Now flash loan a small amount
-        // Pass the token address as data for the callback
-        bytes memory data = abi.encode(address(loanToken));
-        morpho_flashLoan(address(loanToken), 1e18, data);
+        // Create the market
+        morpho_createMarket(newMarketParams);
+
+        // Verify market was created by checking if it exists
+        // If the market exists, this call should not revert
+        morpho.accrueInterest(newMarketParams);
     }
 
     // Test 2: morpho_setAuthorization - no prerequisite
@@ -94,17 +102,36 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         }
     }
 
-    // Test 4: morpho_accrueInterest - requires market (already created in setup)
-    function test_morpho_accrueInterest() public {
-        // Market is already created in setup, just accrue interest
-        morpho_accrueInterest(defaultMarketParams);
+    // Test 4: morpho_flashLoan - no prerequisite
+    function test_morpho_flashLoan() public {
+        // Flash loans require liquidity in Morpho
+        // First supply some liquidity to the protocol
+        uint256 supplyAmount = 10000e18;
+        morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
+
+        // Now flash loan a small amount
+        // Pass the token address as data for the callback
+        bytes memory data = abi.encode(address(loanToken));
+        morpho_flashLoan(address(loanToken), 1e18, data);
     }
 
-    // Test 5: morpho_supply - requires market (already created in setup)
+    // Test 5: morpho_supplyCollateral - createMarket must be called first
+    function test_morpho_supplyCollateral() public {
+        uint256 collateralAmount = 1000e18;
+
+        // Supply collateral to the market (market already created in setup)
+        morpho_supplyCollateral(defaultMarketParams, collateralAmount, _getActor(), hex"");
+
+        // Verify collateral was supplied
+        (,, uint128 collateral) = morpho.position(defaultMarketId, _getActor());
+        require(collateral > 0, "Collateral should be greater than 0");
+    }
+
+    // Test 6: morpho_supply - createMarket must be called first
     function test_morpho_supply() public {
         uint256 supplyAmount = 1000e18;
 
-        // Supply assets to the market
+        // Supply assets to the market (market already created in setup)
         // onBehalf and data parameters: using _getActor() and empty bytes
         morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
 
@@ -113,24 +140,18 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(supplyShares > 0, "Supply shares should be greater than 0");
     }
 
-    // Test 6: morpho_supplyCollateral - requires market (already created in setup)
-    function test_morpho_supplyCollateral() public {
-        uint256 collateralAmount = 1000e18;
-
-        // Supply collateral to the market
-        morpho_supplyCollateral(defaultMarketParams, collateralAmount, _getActor(), hex"");
-
-        // Verify collateral was supplied
-        (,, uint128 collateral) = morpho.position(defaultMarketId, _getActor());
-        require(collateral > 0, "Collateral should be greater than 0");
+    // Test 7: morpho_accrueInterest - createMarket must be called first
+    function test_morpho_accrueInterest() public {
+        // Market is already created in setup, just accrue interest
+        morpho_accrueInterest(defaultMarketParams);
     }
 
-    // Test 7: morpho_withdraw - requires supply first
+    // Test 8: morpho_withdraw - createMarket and supply must be called first
     function test_morpho_withdraw() public {
         uint256 supplyAmount = 1000e18;
         uint256 withdrawAmount = 500e18;
 
-        // First supply
+        // First supply (market already created in setup)
         morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
 
         // Then withdraw
@@ -141,12 +162,12 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(supplyShares > 0, "Should still have some supply shares");
     }
 
-    // Test 8: morpho_withdrawCollateral - requires supplyCollateral first
+    // Test 9: morpho_withdrawCollateral - createMarket and supplyCollateral must be called first
     function test_morpho_withdrawCollateral() public {
         uint256 collateralAmount = 1000e18;
         uint256 withdrawAmount = 500e18;
 
-        // First supply collateral
+        // First supply collateral (market already created in setup)
         morpho_supplyCollateral(defaultMarketParams, collateralAmount, _getActor(), hex"");
 
         // Then withdraw collateral
@@ -157,13 +178,13 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(collateral > 0, "Should still have some collateral");
     }
 
-    // Test 10: morpho_borrow - requires market, supply (for liquidity), and supplyCollateral
+    // Test 10: morpho_borrow - createMarket, supply, and supplyCollateral must be called first
     function test_morpho_borrow() public {
         uint256 supplyAmount = 10000e18;
         uint256 collateralAmount = 10000e18;
         uint256 borrowAmount = 1000e18;
 
-        // First, default actor (address(this)) provides liquidity
+        // First, default actor (address(this)) provides liquidity (market already created in setup)
         morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
 
         // Switch to another actor
@@ -180,14 +201,14 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(borrowShares > 0, "Borrow shares should be greater than 0");
     }
 
-    // Test 9: morpho_repay - requires borrow first
+    // Test 11: morpho_repay - createMarket and borrow must be called first
     function test_morpho_repay() public {
         uint256 supplyAmount = 10000e18;
         uint256 collateralAmount = 10000e18;
         uint256 borrowAmount = 1000e18;
         uint256 repayAmount = 500e18;
 
-        // First, default actor provides liquidity
+        // First, default actor provides liquidity (market already created in setup)
         morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
 
         // Switch to another actor
@@ -205,13 +226,13 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashL
         require(borrowShares > 0, "Should still have some borrow shares");
     }
 
-    // Test 11: morpho_liquidate - requires unhealthy position
+    // Test 12: morpho_liquidate - createMarket, supply, supplyCollateral, and borrow must be called first, plus borrower must be unhealthy
     function test_morpho_liquidate() public {
         uint256 supplyAmount = 10000e18;
         uint256 collateralAmount = 10000e18;
         uint256 borrowAmount = 7000e18; // Borrow close to max (80% LTV)
 
-        // First, default actor provides liquidity
+        // First, default actor provides liquidity (market already created in setup)
         morpho_supply(defaultMarketParams, supplyAmount, 0, _getActor(), hex"");
 
         // Switch to borrower

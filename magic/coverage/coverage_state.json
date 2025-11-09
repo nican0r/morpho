@@ -1,0 +1,14 @@
+{
+  "current_phase": 4,
+  "phase_0_complete": true,
+  "phase_1_complete": true,
+  "phase_2_complete": true,
+  "phase_3_complete": true,
+  "phase_4_complete": false,
+  "phase_5_complete": false,
+  "phase_6_complete": false,
+  "iterations": 0,
+  "last_coverage_timestamp": 1762507523,
+  "coverage_improved": false,
+  "convergence_achieved": false
+}
