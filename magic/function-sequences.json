@@ -1,0 +1,66 @@
+{
+  "morpho_createMarket": {
+    "prerequisite_functions": []
+  },
+  "morpho_supply": {
+    "prerequisite_functions": [
+      "morpho_createMarket"
+    ]
+  },
+  "morpho_supplyCollateral": {
+    "prerequisite_functions": [
+      "morpho_createMarket"
+    ]
+  },
+  "morpho_borrow": {
+    "prerequisite_functions": [
+      "morpho_createMarket",
+      "morpho_supply",
+      "morpho_supplyCollateral"
+    ]
+  },
+  "morpho_repay": {
+    "prerequisite_functions": [
+      "morpho_createMarket",
+      "morpho_borrow"
+    ]
+  },
+  "morpho_withdraw": {
+    "prerequisite_functions": [
+      "morpho_createMarket",
+      "morpho_supply"
+    ]
+  },
+  "morpho_withdrawCollateral": {
+    "prerequisite_functions": [
+      "morpho_createMarket",
+      "morpho_supplyCollateral"
+    ]
+  },
+  "morpho_liquidate": {
+    "prerequisite_functions": [
+      "morpho_createMarket",
+      "morpho_supply",
+      "morpho_supplyCollateral",
+      "morpho_borrow"
+    ]
+  },
+  "morpho_flashLoan": {
+    "prerequisite_functions": [
+      "morpho_supply"
+    ]
+  },
+  "morpho_accrueInterest": {
+    "prerequisite_functions": [
+      "morpho_createMarket",
+      "morpho_supply",
+      "morpho_borrow"
+    ]
+  },
+  "morpho_setAuthorization": {
+    "prerequisite_functions": []
+  },
+  "morpho_setAuthorizationWithSig": {
+    "prerequisite_functions": []
+  }
+}

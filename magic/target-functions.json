@@ -1,0 +1,19 @@
+[
+  {
+    "contract": "MorphoTargets",
+    "target_functions": [
+      "morpho_accrueInterest",
+      "morpho_borrow",
+      "morpho_createMarket",
+      "morpho_flashLoan",
+      "morpho_liquidate",
+      "morpho_repay",
+      "morpho_setAuthorization",
+      "morpho_setAuthorizationWithSig",
+      "morpho_supply",
+      "morpho_supplyCollateral",
+      "morpho_withdraw",
+      "morpho_withdrawCollateral"
+    ]
+  }
+]
