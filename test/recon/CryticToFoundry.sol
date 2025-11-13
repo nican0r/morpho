@@ -12,7 +12,7 @@ import {ORACLE_PRICE_SCALE} from "src/libraries/ConstantsLib.sol";
 import {IMorphoFlashLoanCallback} from "src/interfaces/IMorphoCallbacks.sol";
 
 // forge test --match-contract CryticToFoundry -vv
-contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts, IMorphoFlashLoanCallback {
+contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
     function setUp() public {
         setup();
 

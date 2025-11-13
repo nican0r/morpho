@@ -28,5 +28,6 @@ docs/
 crytic-export
 echidna
 medusa
+context_output
 
 lib
