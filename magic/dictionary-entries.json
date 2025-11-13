@@ -1,0 +1,410 @@
+{
+    "morpho_accrueInterest": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            },
+            {
+                "loanToken": "address(0)",
+                "collateralToken": "address(0)",
+                "oracle": "address(0)",
+                "irm": "address(0)",
+                "lltv": "0"
+            },
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(0)",
+                "lltv": "0.5e18"
+            }
+        ]
+    },
+    "morpho_borrow": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            }
+        ],
+        "assets": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint88).max",
+            "type(uint128).max",
+            "type(uint256).max"
+        ],
+        "shares": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint128).max"
+        ],
+        "onBehalf": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ],
+        "receiver": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ]
+    },
+    "morpho_createMarket": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            },
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(0)",
+                "lltv": "0"
+            },
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.5e18"
+            },
+            {
+                "loanToken": "address(0)",
+                "collateralToken": "address(0)",
+                "oracle": "address(0)",
+                "irm": "address(0)",
+                "lltv": "0"
+            }
+        ]
+    },
+    "morpho_flashLoan": {
+        "token": [
+            "address(loanToken)",
+            "address(collateralToken)",
+            "address(0)",
+            "address(this)"
+        ],
+        "assets": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint88).max",
+            "type(uint128).max",
+            "type(uint256).max"
+        ],
+        "data": [
+            "",
+            "0x",
+            "0x00",
+            "0x1234",
+            "0xffffffff"
+        ]
+    },
+    "morpho_liquidate": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            }
+        ],
+        "borrower": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ],
+        "seizedAssets": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint128).max"
+        ],
+        "repaidShares": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint128).max"
+        ],
+        "data": [
+            "",
+            "0x",
+            "0x00",
+            "0x1234",
+            "0xffffffff"
+        ]
+    },
+    "morpho_repay": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            }
+        ],
+        "assets": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint88).max",
+            "type(uint128).max",
+            "type(uint256).max"
+        ],
+        "shares": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint128).max"
+        ],
+        "onBehalf": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ],
+        "data": [
+            "",
+            "0x",
+            "0x00",
+            "0x1234",
+            "0xffffffff"
+        ]
+    },
+    "morpho_setAuthorization": {
+        "authorized": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ],
+        "newIsAuthorized": [
+            "true",
+            "false"
+        ]
+    },
+    "morpho_setAuthorizationWithSig": {
+        "Authorization": [
+            {
+                "authorizer": "address(this)",
+                "authorized": "address(0x100)",
+                "isAuthorized": "true",
+                "nonce": "0",
+                "deadline": "block.timestamp + 1 days"
+            },
+            {
+                "authorizer": "address(0x100)",
+                "authorized": "address(this)",
+                "isAuthorized": "false",
+                "nonce": "1",
+                "deadline": "block.timestamp + 1 days"
+            }
+        ],
+        "Signature": [
+            {
+                "v": "27",
+                "r": "bytes32(uint256(1))",
+                "s": "bytes32(uint256(1))"
+            },
+            {
+                "v": "28",
+                "r": "bytes32(uint256(2))",
+                "s": "bytes32(uint256(2))"
+            }
+        ]
+    },
+    "morpho_supply": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            }
+        ],
+        "assets": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint88).max",
+            "type(uint128).max",
+            "type(uint256).max"
+        ],
+        "shares": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint128).max"
+        ],
+        "onBehalf": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ],
+        "data": [
+            "",
+            "0x",
+            "0x00",
+            "0x1234",
+            "0xffffffff"
+        ]
+    },
+    "morpho_supplyCollateral": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            }
+        ],
+        "assets": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint88).max",
+            "type(uint128).max",
+            "type(uint256).max"
+        ],
+        "onBehalf": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ],
+        "data": [
+            "",
+            "0x",
+            "0x00",
+            "0x1234",
+            "0xffffffff"
+        ]
+    },
+    "morpho_withdraw": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            }
+        ],
+        "assets": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint88).max",
+            "type(uint128).max",
+            "type(uint256).max"
+        ],
+        "shares": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint128).max"
+        ],
+        "onBehalf": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ],
+        "receiver": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ]
+    },
+    "morpho_withdrawCollateral": {
+        "MarketParams": [
+            {
+                "loanToken": "address(loanToken)",
+                "collateralToken": "address(collateralToken)",
+                "oracle": "address(oracle)",
+                "irm": "address(irm)",
+                "lltv": "0.8e18"
+            }
+        ],
+        "assets": [
+            "0",
+            "1",
+            "1e18",
+            "100e18",
+            "1000e18",
+            "type(uint88).max",
+            "type(uint128).max",
+            "type(uint256).max"
+        ],
+        "onBehalf": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ],
+        "receiver": [
+            "address(this)",
+            "address(0x100)",
+            "address(0x200)",
+            "address(0)",
+            "morpho.feeRecipient()"
+        ]
+    }
+}

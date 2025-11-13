@@ -1,0 +1,130 @@
+{
+    "Morpho": {
+        "functions_to_cover": [
+            "accrueInterest",
+            "borrow",
+            "createMarket",
+            "flashLoan",
+            "liquidate",
+            "repay",
+            "setAuthorization",
+            "setAuthorizationWithSig",
+            "supply",
+            "supplyCollateral",
+            "withdraw",
+            "withdrawCollateral",
+            "_accrueInterest",
+            "_isHealthy",
+            "_isSenderAuthorized"
+        ]
+    },
+    "MarketParamsLib": {
+        "functions_to_cover": [
+            "id"
+        ]
+    },
+    "MathLib": {
+        "functions_to_cover": [
+            "wMulDown",
+            "wTaylorCompounded",
+            "mulDivDown",
+            "mulDivUp",
+            "wDivDown",
+            "wDivUp"
+        ]
+    },
+    "UtilsLib": {
+        "functions_to_cover": [
+            "toUint128",
+            "exactlyOneZero",
+            "min",
+            "zeroFloorSub"
+        ]
+    },
+    "SharesMathLib": {
+        "functions_to_cover": [
+            "toSharesDown",
+            "toSharesUp",
+            "toAssetsDown",
+            "toAssetsUp"
+        ]
+    },
+    "SafeTransferLib": {
+        "functions_to_cover": [
+            "safeTransfer",
+            "safeTransferFrom"
+        ]
+    },
+    "EventsLib": {
+        "functions_to_cover": [
+            "AccrueInterest",
+            "Borrow",
+            "CreateMarket",
+            "Liquidate",
+            "Repay",
+            "Supply",
+            "Withdraw",
+            "FlashLoan",
+            "SetAuthorization"
+        ]
+    },
+    "ErrorsLib": {
+        "functions_to_cover": [
+            "MARKET_NOT_CREATED",
+            "INCONSISTENT_INPUT",
+            "ZERO_ADDRESS",
+            "UNAUTHORIZED",
+            "INSUFFICIENT_COLLATERAL",
+            "INSUFFICIENT_LIQUIDITY",
+            "HEALTHY_POSITION",
+            "IRM_NOT_ENABLED",
+            "LLTV_NOT_ENABLED",
+            "MARKET_ALREADY_CREATED",
+            "MAX_UINT128_EXCEEDED",
+            "ZERO_ASSETS"
+        ]
+    },
+    "ConstantsLib": {
+        "functions_to_cover": [
+            "WAD",
+            "VIRTUAL_SHARES",
+            "VIRTUAL_ASSETS",
+            "ORACLE_PRICE_SCALE",
+            "MAX_LIQUIDATION_INCENTIVE_FACTOR",
+            "LIQUIDATION_CURSOR"
+        ]
+    },
+    "IERC20": {
+        "functions_to_cover": [
+            "safeTransfer",
+            "safeTransferFrom",
+            "transfer",
+            "transferFrom"
+        ]
+    },
+    "IMorphoSupplyCallback": {
+        "functions_to_cover": [
+            "onMorphoSupply"
+        ]
+    },
+    "IMorphoLiquidateCallback": {
+        "functions_to_cover": [
+            "onMorphoLiquidate"
+        ]
+    },
+    "IMorphoFlashLoanCallback": {
+        "functions_to_cover": [
+            "onMorphoFlashLoan"
+        ]
+    },
+    "IIrm": {
+        "functions_to_cover": [
+            "borrowRate"
+        ]
+    },
+    "IOracle": {
+        "functions_to_cover": [
+            "price"
+        ]
+    }
+}
