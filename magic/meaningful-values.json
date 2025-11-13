@@ -1,0 +1,72 @@
+[
+    {
+        "target_function": "morpho_accrueInterest",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_borrow",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_borrow",
+        "type": "max",
+        "call": "loanToken.balanceOf(_getActor())"
+    },
+    {
+        "target_function": "morpho_createMarket",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_flashLoan",
+        "type": "max",
+        "call": "loanToken.balanceOf(address(morpho))"
+    },
+    {
+        "target_function": "morpho_liquidate",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_repay",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_repay",
+        "type": "max",
+        "call": "loanToken.balanceOf(_getActor())"
+    },
+    {
+        "target_function": "morpho_supply",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_supply",
+        "type": "max",
+        "call": "loanToken.balanceOf(_getActor())"
+    },
+    {
+        "target_function": "morpho_supplyCollateral",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_supplyCollateral",
+        "type": "max",
+        "call": "collateralToken.balanceOf(_getActor())"
+    },
+    {
+        "target_function": "morpho_withdraw",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_withdrawCollateral",
+        "type": "exact",
+        "call": "defaultMarketParams"
+    }
+]
