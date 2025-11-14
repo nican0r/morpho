@@ -22,6 +22,51 @@ abstract contract TargetFunctions is
 {
     /// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
 
+    function shortcut_borrow(uint256 supplyAmount, uint256 collateralAmount, uint256 borrowAmount) public {
+        // Create market first
+        morpho_createMarket_clamped();
+        
+        // Supply liquidity with default actor
+        morpho_supply_clamped(supplyAmount, 0, _getActor(), "");
+        
+        // Switch to different actor to supply collateral and borrow
+        switchActor(1);
+        morpho_supplyCollateral_clamped(collateralAmount, _getActor(), "");
+        morpho_borrow_clamped(borrowAmount, 0, _getActor(), _getActor());
+    }
+
+    function shortcut_liquidate(uint256 supplyAmount, uint256 collateralAmount, uint256 borrowAmount, uint256 liquidateAmount) public {
+        // Create market first
+        morpho_createMarket_clamped();
+        
+        // Supply liquidity with default actor
+        morpho_supply_clamped(supplyAmount, 0, _getActor(), "");
+        
+        // Switch to different actor to supply collateral and borrow
+        switchActor(1);
+        morpho_supplyCollateral_clamped(collateralAmount, _getActor(), "");
+        morpho_borrow_clamped(borrowAmount, 0, _getActor(), _getActor());
+        
+        // Switch back to default actor to liquidate
+        switchActor(0);
+        morpho_liquidate_clamped(_getActor(1), liquidateAmount, 0, "");
+    }
+
+    function shortcut_accrueInterest(uint256 supplyAmount, uint256 borrowAmount) public {
+        // Create market first
+        morpho_createMarket_clamped();
+        
+        // Supply liquidity with default actor
+        morpho_supply_clamped(supplyAmount, 0, _getActor(), "");
+        
+        // Switch to different actor to borrow
+        switchActor(1);
+        morpho_borrow_clamped(borrowAmount, 0, _getActor(), _getActor());
+        
+        // Switch back to default actor to accrue interest
+        switchActor(0);
+        morpho_accrueInterest_clamped();
+    }
 
     /// AUTO GENERATED TARGET FUNCTIONS - WARNING: DO NOT DELETE OR MODIFY THIS LINE ///
 }
