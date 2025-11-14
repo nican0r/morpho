@@ -2,71 +2,145 @@
     {
         "target_function": "morpho_accrueInterest",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
     },
     {
         "target_function": "morpho_borrow",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
     },
     {
         "target_function": "morpho_borrow",
         "type": "max",
-        "call": "loanToken.balanceOf(_getActor())"
+        "value": "uint256 assets",
+        "access": "loanToken.balanceOf(_getActor())"
+    },
+    {
+        "target_function": "morpho_borrow",
+        "type": "max",
+        "value": "uint256 shares",
+        "access": "market[defaultMarketId].totalSupplyAssets"
     },
     {
         "target_function": "morpho_createMarket",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
     },
     {
         "target_function": "morpho_flashLoan",
         "type": "max",
-        "call": "loanToken.balanceOf(address(morpho))"
+        "value": "uint256 assets",
+        "access": "loanToken.balanceOf(address(morpho))"
     },
     {
         "target_function": "morpho_liquidate",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_liquidate",
+        "type": "max",
+        "value": "uint256 seizedAssets",
+        "access": "position[defaultMarketId][_getActor()].collateral"
+    },
+    {
+        "target_function": "morpho_liquidate",
+        "type": "max",
+        "value": "uint256 repaidShares",
+        "access": "position[defaultMarketId][_getActor()].borrowShares"
     },
     {
         "target_function": "morpho_repay",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
     },
     {
         "target_function": "morpho_repay",
         "type": "max",
-        "call": "loanToken.balanceOf(_getActor())"
+        "value": "uint256 assets",
+        "access": "loanToken.balanceOf(_getActor())"
+    },
+    {
+        "target_function": "morpho_repay",
+        "type": "max",
+        "value": "uint256 shares",
+        "access": "position[defaultMarketId][_getActor()].borrowShares"
     },
     {
         "target_function": "morpho_supply",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
     },
     {
         "target_function": "morpho_supply",
         "type": "max",
-        "call": "loanToken.balanceOf(_getActor())"
+        "value": "uint256 assets",
+        "access": "loanToken.balanceOf(_getActor())"
+    },
+    {
+        "target_function": "morpho_supply",
+        "type": "max",
+        "value": "uint256 shares",
+        "access": "market[defaultMarketId].totalSupplyAssets"
     },
     {
         "target_function": "morpho_supplyCollateral",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
     },
     {
         "target_function": "morpho_supplyCollateral",
         "type": "max",
-        "call": "collateralToken.balanceOf(_getActor())"
+        "value": "uint256 assets",
+        "access": "collateralToken.balanceOf(_getActor())"
     },
     {
         "target_function": "morpho_withdraw",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_withdraw",
+        "type": "max",
+        "value": "uint256 assets",
+        "access": "position[defaultMarketId][_getActor()].supplyShares.toAssetsDown(market[defaultMarketId].totalSupplyAssets, market[defaultMarketId].totalSupplyShares)"
+    },
+    {
+        "target_function": "morpho_withdraw",
+        "type": "max",
+        "value": "uint256 shares",
+        "access": "position[defaultMarketId][_getActor()].supplyShares"
     },
     {
         "target_function": "morpho_withdrawCollateral",
         "type": "exact",
-        "call": "defaultMarketParams"
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "morpho_withdrawCollateral",
+        "type": "max",
+        "value": "uint256 assets",
+        "access": "position[defaultMarketId][_getActor()].collateral"
+    },
+    {
+        "target_function": "morpho_setAuthorization",
+        "type": "exact",
+        "value": "address authorized",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "morpho_setAuthorizationWithSig",
+        "type": "exact",
+        "value": "Authorization memory authorization",
+        "access": "Authorization({authorizer: _getActor(), authorized: _getActor(), isAuthorized: true, nonce: 0, deadline: block.timestamp + 1 days})"
     }
 ]
