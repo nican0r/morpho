@@ -18,6 +18,18 @@ abstract contract AdminTargets is
 {
     /// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
 
+    // Clamped handler for enableLltv
+    function morpho_enableLltv_clamped(uint256 lltv) public asAdmin {
+        lltv = between(lltv, 0, 1e18 - 1);
+        morpho.enableLltv(lltv);
+    }
+
+    // Clamped handler for setFee
+    function morpho_setFee_clamped(uint256 newFee) public asAdmin {
+        newFee = between(newFee, 0, 0.25e18);
+        morpho.setFee(defaultMarketParams, newFee);
+    }
+
     // Admin-only functions that require owner privileges
     function morpho_enableIrm(address irm) public asAdmin {
         morpho.enableIrm(irm);
