@@ -1,0 +1,176 @@
+[
+    {
+        "target_function": "accrueInterest",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "borrow",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "borrow",
+        "type": "max",
+        "value": "uint256 assets",
+        "access": "IERC20(defaultMarketParams.loanToken).balanceOf(address(morpho))"
+    },
+    {
+        "target_function": "borrow",
+        "type": "exact",
+        "value": "address onBehalf",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "borrow",
+        "type": "exact",
+        "value": "address receiver",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "createMarket",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "enableLltv",
+        "type": "max",
+        "value": "uint256 lltv",
+        "access": "1e18 - 1"
+    },
+    {
+        "target_function": "flashLoan",
+        "type": "exact",
+        "value": "address token",
+        "access": "address(loanToken)"
+    },
+    {
+        "target_function": "flashLoan",
+        "type": "max",
+        "value": "uint256 assets",
+        "access": "IERC20(loanToken).balanceOf(address(morpho))"
+    },
+    {
+        "target_function": "liquidate",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "liquidate",
+        "type": "exact",
+        "value": "address borrower",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "repay",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "repay",
+        "type": "max",
+        "value": "uint256 assets",
+        "access": "IERC20(defaultMarketParams.loanToken).balanceOf(_getActor())"
+    },
+    {
+        "target_function": "repay",
+        "type": "exact",
+        "value": "address onBehalf",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "setAuthorization",
+        "type": "exact",
+        "value": "address authorized",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "setFee",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "setFee",
+        "type": "max",
+        "value": "uint256 newFee",
+        "access": "0.25e18"
+    },
+    {
+        "target_function": "supply",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "supply",
+        "type": "max",
+        "value": "uint256 assets",
+        "access": "IERC20(defaultMarketParams.loanToken).balanceOf(_getActor())"
+    },
+    {
+        "target_function": "supply",
+        "type": "exact",
+        "value": "address onBehalf",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "supplyCollateral",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "supplyCollateral",
+        "type": "max",
+        "value": "uint256 assets",
+        "access": "IERC20(defaultMarketParams.collateralToken).balanceOf(_getActor())"
+    },
+    {
+        "target_function": "supplyCollateral",
+        "type": "exact",
+        "value": "address onBehalf",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "withdraw",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "withdraw",
+        "type": "exact",
+        "value": "address onBehalf",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "withdraw",
+        "type": "exact",
+        "value": "address receiver",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "withdrawCollateral",
+        "type": "exact",
+        "value": "MarketParams memory marketParams",
+        "access": "defaultMarketParams"
+    },
+    {
+        "target_function": "withdrawCollateral",
+        "type": "exact",
+        "value": "address onBehalf",
+        "access": "_getActor()"
+    },
+    {
+        "target_function": "withdrawCollateral",
+        "type": "exact",
+        "value": "address receiver",
+        "access": "_getActor()"
+    }
+]
