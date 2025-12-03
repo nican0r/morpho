@@ -120,6 +120,31 @@ abstract contract MorphoTargets is BaseTargetFunctions, Properties {
         morpho.withdrawCollateral(defaultMarketParams, assets, _getActor(), _getActor());
     }
 
+    // Clamped handler for ERC20Mock.balanceOf (loanToken)
+    function erc20Mock_balanceOf_clamped_loanToken() public asActor {
+        loanToken.balanceOf(_getActor());
+    }
+
+    // Clamped handler for ERC20Mock.balanceOf (collateralToken)
+    function erc20Mock_balanceOf_clamped_collateralToken() public asActor {
+        collateralToken.balanceOf(_getActor());
+    }
+
+    // Clamped handler for Morpho.market
+    function morpho_market_clamped() public asActor {
+        morpho.market(defaultMarketId);
+    }
+
+    // Clamped handler for Morpho.nonce
+    function morpho_nonce_clamped() public asActor {
+        morpho.nonce(_getActor());
+    }
+
+    // Clamped handler for Morpho.position
+    function morpho_position_clamped() public asActor {
+        morpho.position(defaultMarketId, _getActor());
+    }
+
     /// AUTO GENERATED TARGET FUNCTIONS - WARNING: DO NOT DELETE OR MODIFY THIS LINE ///
 
     function morpho_accrueInterest(MarketParams memory marketParams) public asActor {
