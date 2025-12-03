@@ -7,7 +7,7 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_setAuthorizationWithSig(struct Authorization,struct Signature)`
 - **Visibility**: public
-- **Source Range**: 2021:214:67
+- **Source Range**: 2072:214:67
 - **Inherited From**: MorphoTargets
 
 ## Implementation

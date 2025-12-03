@@ -186,7 +186,7 @@ constructor() payable;
 
 - **Signature**: `morpho_enableIrm(address)`
 - **Visibility**: public
-- **Source Range**: 570:92:64
+- **Source Range**: 562:92:64
 - **Details**: [function_morpho_enableIrm_address.md](./function_morpho_enableIrm_address.md)
 
 **Signature:**
@@ -199,7 +199,7 @@ function morpho_enableIrm(address irm) public asAdmin();
 
 - **Signature**: `morpho_enableLltv(uint256)`
 - **Visibility**: public
-- **Source Range**: 668:96:64
+- **Source Range**: 660:96:64
 - **Details**: [function_morpho_enableLltv_uint256.md](./function_morpho_enableLltv_uint256.md)
 
 **Signature:**
@@ -211,7 +211,7 @@ function morpho_enableLltv(uint256 lltv) public asAdmin();
 
 - **Signature**: `morpho_setFee(struct MarketParams,uint256)`
 - **Visibility**: public
-- **Source Range**: 770:140:64
+- **Source Range**: 762:140:64
 - **Details**: [function_morpho_setFee_struct_MarketParams_uint256.md](./function_morpho_setFee_struct_MarketParams_uint256.md)
 
 **Signature:**
@@ -223,7 +223,7 @@ function morpho_setFee(MarketParams memory marketParams, uint256 newFee) public 
 
 - **Signature**: `morpho_setFeeRecipient(address)`
 - **Visibility**: public
-- **Source Range**: 916:128:64
+- **Source Range**: 908:128:64
 - **Details**: [function_morpho_setFeeRecipient_address.md](./function_morpho_setFeeRecipient_address.md)
 
 **Signature:**
@@ -235,7 +235,7 @@ function morpho_setFeeRecipient(address newFeeRecipient) public asAdmin();
 
 - **Signature**: `morpho_setOwner(address)`
 - **Visibility**: public
-- **Source Range**: 1050:100:64
+- **Source Range**: 1042:100:64
 - **Details**: [function_morpho_setOwner_address.md](./function_morpho_setOwner_address.md)
 
 **Signature:**
@@ -313,7 +313,7 @@ function asset_mint(address to, uint128 amt) public updateGhosts() asAdmin();
 
 - **Signature**: `morpho_accrueInterest(struct MarketParams)`
 - **Visibility**: public
-- **Source Range**: 595:132:67
+- **Source Range**: 646:132:67
 - **Details**: [function_morpho_accrueInterest_struct_MarketParams.md](./function_morpho_accrueInterest_struct_MarketParams.md)
 
 **Signature:**
@@ -326,7 +326,7 @@ function morpho_accrueInterest(MarketParams memory marketParams) public asActor(
 
 - **Signature**: `morpho_borrow(struct MarketParams,uint256,uint256,address,address)`
 - **Visibility**: public
-- **Source Range**: 733:266:67
+- **Source Range**: 784:266:67
 - **Details**: [function_morpho_borrow_struct_MarketParams_uint256_uint256_address_address.md](./function_morpho_borrow_struct_MarketParams_uint256_uint256_address_address.md)
 
 **Signature:**
@@ -338,7 +338,7 @@ function morpho_borrow(MarketParams memory marketParams, uint256 assets, uint256
 
 - **Signature**: `morpho_createMarket(struct MarketParams)`
 - **Visibility**: public
-- **Source Range**: 1005:128:67
+- **Source Range**: 1056:128:67
 - **Details**: [function_morpho_createMarket_struct_MarketParams.md](./function_morpho_createMarket_struct_MarketParams.md)
 
 **Signature:**
@@ -350,7 +350,7 @@ function morpho_createMarket(MarketParams memory marketParams) public asActor();
 
 - **Signature**: `morpho_flashLoan(address,uint256,bytes)`
 - **Visibility**: public
-- **Source Range**: 1139:145:67
+- **Source Range**: 1190:145:67
 - **Details**: [function_morpho_flashLoan_address_uint256_bytes.md](./function_morpho_flashLoan_address_uint256_bytes.md)
 
 **Signature:**
@@ -362,7 +362,7 @@ function morpho_flashLoan(address token, uint256 assets, bytes memory data) publ
 
 - **Signature**: `morpho_liquidate(struct MarketParams,address,uint256,uint256,bytes)`
 - **Visibility**: public
-- **Source Range**: 1290:293:67
+- **Source Range**: 1341:293:67
 - **Details**: [function_morpho_liquidate_struct_MarketParams_address_uint256_uint256_bytes.md](./function_morpho_liquidate_struct_MarketParams_address_uint256_uint256_bytes.md)
 
 **Signature:**
@@ -374,7 +374,7 @@ function morpho_liquidate(MarketParams memory marketParams, address borrower, ui
 
 - **Signature**: `morpho_repay(struct MarketParams,uint256,uint256,address,bytes)`
 - **Visibility**: public
-- **Source Range**: 1589:261:67
+- **Source Range**: 1640:261:67
 - **Details**: [function_morpho_repay_struct_MarketParams_uint256_uint256_address_bytes.md](./function_morpho_repay_struct_MarketParams_uint256_uint256_address_bytes.md)
 
 **Signature:**
@@ -386,7 +386,7 @@ function morpho_repay(MarketParams memory marketParams, uint256 assets, uint256 
 
 - **Signature**: `morpho_setAuthorization(address,bool)`
 - **Visibility**: public
-- **Source Range**: 1856:159:67
+- **Source Range**: 1907:159:67
 - **Details**: [function_morpho_setAuthorization_address_bool.md](./function_morpho_setAuthorization_address_bool.md)
 
 **Signature:**
@@ -398,7 +398,7 @@ function morpho_setAuthorization(address authorized, bool newIsAuthorized) publi
 
 - **Signature**: `morpho_setAuthorizationWithSig(struct Authorization,struct Signature)`
 - **Visibility**: public
-- **Source Range**: 2021:214:67
+- **Source Range**: 2072:214:67
 - **Details**: [function_morpho_setAuthorizationWithSig_struct_Authorization_struct_Signature.md](./function_morpho_setAuthorizationWithSig_struct_Authorization_struct_Signature.md)
 
 **Signature:**
@@ -410,7 +410,7 @@ function morpho_setAuthorizationWithSig(Authorization memory authorization, Sign
 
 - **Signature**: `morpho_supply(struct MarketParams,uint256,uint256,address,bytes)`
 - **Visibility**: public
-- **Source Range**: 2241:263:67
+- **Source Range**: 2292:263:67
 - **Details**: [function_morpho_supply_struct_MarketParams_uint256_uint256_address_bytes.md](./function_morpho_supply_struct_MarketParams_uint256_uint256_address_bytes.md)
 
 **Signature:**
@@ -422,7 +422,7 @@ function morpho_supply(MarketParams memory marketParams, uint256 assets, uint256
 
 - **Signature**: `morpho_supplyCollateral(struct MarketParams,uint256,address,bytes)`
 - **Visibility**: public
-- **Source Range**: 2510:251:67
+- **Source Range**: 2561:251:67
 - **Details**: [function_morpho_supplyCollateral_struct_MarketParams_uint256_address_bytes.md](./function_morpho_supplyCollateral_struct_MarketParams_uint256_address_bytes.md)
 
 **Signature:**
@@ -434,7 +434,7 @@ function morpho_supplyCollateral(MarketParams memory marketParams, uint256 asset
 
 - **Signature**: `morpho_withdraw(struct MarketParams,uint256,uint256,address,address)`
 - **Visibility**: public
-- **Source Range**: 2767:270:67
+- **Source Range**: 2818:270:67
 - **Details**: [function_morpho_withdraw_struct_MarketParams_uint256_uint256_address_address.md](./function_morpho_withdraw_struct_MarketParams_uint256_uint256_address_address.md)
 
 **Signature:**
@@ -446,7 +446,7 @@ function morpho_withdraw(MarketParams memory marketParams, uint256 assets, uint2
 
 - **Signature**: `morpho_withdrawCollateral(struct MarketParams,uint256,address,address)`
 - **Visibility**: public
-- **Source Range**: 3043:258:67
+- **Source Range**: 3094:258:67
 - **Details**: [function_morpho_withdrawCollateral_struct_MarketParams_uint256_address_address.md](./function_morpho_withdrawCollateral_struct_MarketParams_uint256_address_address.md)
 
 **Signature:**

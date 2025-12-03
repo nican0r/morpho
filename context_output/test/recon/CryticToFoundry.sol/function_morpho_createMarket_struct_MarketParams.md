@@ -7,7 +7,7 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_createMarket(struct MarketParams)`
 - **Visibility**: public
-- **Source Range**: 1005:128:67
+- **Source Range**: 1056:128:67
 - **Inherited From**: MorphoTargets
 
 ## Implementation

@@ -7,7 +7,7 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_enableIrm(address)`
 - **Visibility**: public
-- **Source Range**: 570:92:64
+- **Source Range**: 562:92:64
 - **Inherited From**: AdminTargets
 
 ## Implementation

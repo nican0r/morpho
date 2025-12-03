@@ -7,7 +7,7 @@
 - **Contract**: CryticTester
 - **Signature**: `morpho_setOwner(address)`
 - **Visibility**: public
-- **Source Range**: 1050:100:64
+- **Source Range**: 1042:100:64
 - **Inherited From**: AdminTargets
 
 ## Implementation

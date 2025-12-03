@@ -7,7 +7,7 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_accrueInterest(struct MarketParams)`
 - **Visibility**: public
-- **Source Range**: 595:132:67
+- **Source Range**: 646:132:67
 - **Inherited From**: MorphoTargets
 
 ## Implementation

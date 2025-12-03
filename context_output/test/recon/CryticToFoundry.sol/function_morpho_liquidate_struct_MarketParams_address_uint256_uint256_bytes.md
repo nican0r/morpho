@@ -7,7 +7,7 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_liquidate(struct MarketParams,address,uint256,uint256,bytes)`
 - **Visibility**: public
-- **Source Range**: 1290:293:67
+- **Source Range**: 1341:293:67
 - **Inherited From**: MorphoTargets
 
 ## Implementation

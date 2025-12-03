@@ -7,7 +7,7 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_setAuthorization(address,bool)`
 - **Visibility**: public
-- **Source Range**: 1856:159:67
+- **Source Range**: 1907:159:67
 - **Inherited From**: MorphoTargets
 
 ## Implementation
