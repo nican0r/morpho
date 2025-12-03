@@ -1,0 +1,194 @@
+[
+  {
+    "target_function": "accrueInterest",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "borrow",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "borrow",
+    "type": "max",
+    "value": "uint256 assets",
+    "access": "market[defaultMarketId].totalSupplyAssets"
+  },
+  {
+    "target_function": "borrow",
+    "type": "max",
+    "value": "uint256 shares",
+    "access": "market[defaultMarketId].totalSupplyShares"
+  },
+  {
+    "target_function": "createMarket",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "enableIrm",
+    "type": "exact",
+    "value": "address irm",
+    "access": "address(irm)"
+  },
+  {
+    "target_function": "enableLltv",
+    "type": "exact",
+    "value": "uint256 lltv",
+    "access": "0.5e18"
+  },
+  {
+    "target_function": "enableLltv",
+    "type": "exact",
+    "value": "uint256 lltv",
+    "access": "0.8e18"
+  },
+  {
+    "target_function": "enableLltv",
+    "type": "max",
+    "value": "uint256 lltv",
+    "access": "1e18 - 1"
+  },
+  {
+    "target_function": "flashLoan",
+    "type": "exact",
+    "value": "address token",
+    "access": "address(loanToken)"
+  },
+  {
+    "target_function": "flashLoan",
+    "type": "exact",
+    "value": "address token",
+    "access": "address(collateralToken)"
+  },
+  {
+    "target_function": "flashLoan",
+    "type": "max",
+    "value": "uint256 assets",
+    "access": "IERC20(token).balanceOf(address(morpho))"
+  },
+  {
+    "target_function": "liquidate",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "liquidate",
+    "type": "max",
+    "value": "uint256 seizedAssets",
+    "access": "position[defaultMarketId][borrower].collateral"
+  },
+  {
+    "target_function": "liquidate",
+    "type": "max",
+    "value": "uint256 repaidShares",
+    "access": "position[defaultMarketId][borrower].borrowShares"
+  },
+  {
+    "target_function": "repay",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "repay",
+    "type": "max",
+    "value": "uint256 assets",
+    "access": "IERC20(marketParams.loanToken).balanceOf(_getActor())"
+  },
+  {
+    "target_function": "repay",
+    "type": "max",
+    "value": "uint256 shares",
+    "access": "position[defaultMarketId][onBehalf].borrowShares"
+  },
+  {
+    "target_function": "setFee",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "setFee",
+    "type": "max",
+    "value": "uint256 newFee",
+    "access": "MAX_FEE"
+  },
+  {
+    "target_function": "supply",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "supply",
+    "type": "max",
+    "value": "uint256 assets",
+    "access": "IERC20(marketParams.loanToken).balanceOf(_getActor())"
+  },
+  {
+    "target_function": "supply",
+    "type": "max",
+    "value": "uint256 shares",
+    "access": "market[defaultMarketId].totalSupplyShares"
+  },
+  {
+    "target_function": "supplyCollateral",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "supplyCollateral",
+    "type": "max",
+    "value": "uint256 assets",
+    "access": "IERC20(marketParams.collateralToken).balanceOf(_getActor())"
+  },
+  {
+    "target_function": "withdraw",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "withdraw",
+    "type": "max",
+    "value": "uint256 assets",
+    "access": "market[defaultMarketId].totalSupplyAssets"
+  },
+  {
+    "target_function": "withdraw",
+    "type": "max",
+    "value": "uint256 shares",
+    "access": "position[defaultMarketId][onBehalf].supplyShares"
+  },
+  {
+    "target_function": "withdrawCollateral",
+    "type": "exact",
+    "value": "MarketParams memory marketParams",
+    "access": "defaultMarketParams"
+  },
+  {
+    "target_function": "withdrawCollateral",
+    "type": "max",
+    "value": "uint256 assets",
+    "access": "position[defaultMarketId][onBehalf].collateral"
+  },
+  {
+    "target_function": "setAuthorizationWithSig",
+    "type": "exact",
+    "value": "uint256 nonce",
+    "access": "morpho.nonce(authorization.authorizer)"
+  },
+  {
+    "target_function": "setAuthorizationWithSig",
+    "type": "max",
+    "value": "uint256 deadline",
+    "access": "block.timestamp + 365 days"
+  }
+]
