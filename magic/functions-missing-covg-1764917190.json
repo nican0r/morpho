@@ -1,0 +1,10 @@
+{
+  "timestamp": "1764917190",
+  "lcov_file": "echidna/covered.1764917190.lcov",
+  "missing_coverage": {},
+  "summary": {
+    "functions_analyzed": 20,
+    "functions_with_missing_coverage": 0,
+    "full_coverage": true
+  }
+}
