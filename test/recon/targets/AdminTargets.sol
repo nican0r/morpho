@@ -16,6 +16,36 @@ import {MAX_FEE} from "src/libraries/ConstantsLib.sol";
 abstract contract AdminTargets is BaseTargetFunctions, Properties {
     /// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
 
+    // Clamped handler for enableIrm
+    function morpho_enableIrm_clamped() public asAdmin {
+        morpho_enableIrm(address(irm));
+    }
+
+    // Clamped handlers for enableLltv (two specific values)
+    function morpho_enableLltv_05_clamped() public asAdmin {
+        morpho_enableLltv(0.5e18);
+    }
+
+    function morpho_enableLltv_08_clamped() public asAdmin {
+        morpho_enableLltv(0.8e18);
+    }
+
+    // Clamped handler for setFee
+    function morpho_setFee_clamped(uint256 newFee) public asAdmin {
+        newFee %= MAX_FEE + 1;
+        morpho_setFee(defaultMarketParams, newFee);
+    }
+
+    // Clamped handler for setFeeRecipient
+    function morpho_setFeeRecipient_clamped() public asAdmin {
+        morpho_setFeeRecipient(_getActor());
+    }
+
+    // Clamped handler for setOwner
+    function morpho_setOwner_clamped() public asAdmin {
+        morpho_setOwner(_getActor());
+    }
+
     // Admin-only functions that require owner privileges
     function morpho_enableIrm(address irm) public asAdmin {
         morpho.enableIrm(irm);

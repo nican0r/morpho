@@ -16,6 +16,72 @@ import {ERC20Mock} from "src/mocks/ERC20Mock.sol";
 abstract contract MorphoTargets is BaseTargetFunctions, Properties {
     /// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
 
+    // Clamped handler for accrueInterest
+    function morpho_accrueInterest_clamped() public asActor {
+        morpho_accrueInterest(defaultMarketParams);
+    }
+
+    // Clamped handler for borrow
+    function morpho_borrow_clamped(uint256 assets, uint256 shares) public asActor {
+        assets %= loanToken.balanceOf(address(morpho)) + 1;
+        morpho_borrow(defaultMarketParams, assets, shares, _getActor(), _getActor());
+    }
+
+    // Clamped handler for createMarket
+    function morpho_createMarket_clamped() public asActor {
+        morpho_createMarket(defaultMarketParams);
+    }
+
+    // Clamped handlers for flashLoan with loanToken
+    function morpho_flashLoan_loanToken_clamped(uint256 assets, bytes memory data) public asActor {
+        assets %= loanToken.balanceOf(address(morpho)) + 1;
+        morpho_flashLoan(address(loanToken), assets, data);
+    }
+
+    // Clamped handlers for flashLoan with collateralToken
+    function morpho_flashLoan_collateralToken_clamped(uint256 assets, bytes memory data) public asActor {
+        assets %= collateralToken.balanceOf(address(morpho)) + 1;
+        morpho_flashLoan(address(collateralToken), assets, data);
+    }
+
+    // Clamped handler for liquidate
+    function morpho_liquidate_clamped(uint256 seizedAssets, uint256 repaidShares, bytes memory data) public asActor {
+        morpho_liquidate(defaultMarketParams, _getActor(), seizedAssets, repaidShares, data);
+    }
+
+    // Clamped handler for repay
+    function morpho_repay_clamped(uint256 assets, uint256 shares, bytes memory data) public asActor {
+        assets %= loanToken.balanceOf(_getActor()) + 1;
+        morpho_repay(defaultMarketParams, assets, shares, _getActor(), data);
+    }
+
+    // Clamped handler for setAuthorization
+    function morpho_setAuthorization_clamped(bool newIsAuthorized) public asActor {
+        morpho_setAuthorization(_getActor(), newIsAuthorized);
+    }
+
+    // Clamped handler for supply
+    function morpho_supply_clamped(uint256 assets, uint256 shares, bytes memory data) public asActor {
+        assets %= loanToken.balanceOf(_getActor()) + 1;
+        morpho_supply(defaultMarketParams, assets, shares, _getActor(), data);
+    }
+
+    // Clamped handler for supplyCollateral
+    function morpho_supplyCollateral_clamped(uint256 assets, bytes memory data) public asActor {
+        assets %= collateralToken.balanceOf(_getActor()) + 1;
+        morpho_supplyCollateral(defaultMarketParams, assets, _getActor(), data);
+    }
+
+    // Clamped handler for withdraw
+    function morpho_withdraw_clamped(uint256 assets, uint256 shares) public asActor {
+        morpho_withdraw(defaultMarketParams, assets, shares, _getActor(), _getActor());
+    }
+
+    // Clamped handler for withdrawCollateral
+    function morpho_withdrawCollateral_clamped(uint256 assets) public asActor {
+        morpho_withdrawCollateral(defaultMarketParams, assets, _getActor(), _getActor());
+    }
+
     /// AUTO GENERATED TARGET FUNCTIONS - WARNING: DO NOT DELETE OR MODIFY THIS LINE ///
 
     function morpho_accrueInterest(MarketParams memory marketParams) public asActor {
