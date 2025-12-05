@@ -58,6 +58,53 @@ abstract contract TargetFunctions is AdminTargets, DoomsdayTargets, ManagersTarg
         switchActor(0);
         morpho_liquidate_clamped(seizedAssets, repaidShares, "");
     }
+    
+    /// @dev Shortcut to liquidate with seizedAssets path (exploring line 371-376)
+    function shortcut_liquidate_seizeAssets(uint256 supplyAssets, uint256 collateralAssets, uint256 borrowAssets, uint256 seizedAssets) public {
+        // Create market
+        morpho_createMarket_clamped();
+        
+        // Actor 0: Supply liquidity for borrowing
+        switchActor(0);
+        morpho_supply_clamped(supplyAssets, 0, "");
+        
+        // Actor 1: Supply collateral and borrow (will become liquidatable)
+        switchActor(1);
+        morpho_supplyCollateral_clamped(collateralAssets, "");
+        morpho_borrow_clamped(borrowAssets, 0);
+        
+        // Manipulate oracle price to make position unhealthy
+        vm.prank(address(this));
+        oracle.setPrice(ORACLE_PRICE_SCALE / 2); // 50% price drop
+        
+        // Actor 0: Liquidate using seizedAssets parameter
+        switchActor(0);
+        morpho_liquidate_clamped_seizeAssets(seizedAssets, "");
+    }
+    
+    /// @dev Shortcut to liquidate with bad debt (fully seizing collateral)
+    function shortcut_liquidate_badDebt(uint256 supplyAssets, uint256 collateralAssets, uint256 borrowAssets) public {
+        // Create market
+        morpho_createMarket_clamped();
+        
+        // Actor 0: Supply liquidity for borrowing
+        switchActor(0);
+        morpho_supply_clamped(supplyAssets, 0, "");
+        
+        // Actor 1: Supply collateral and borrow (will become liquidatable)
+        switchActor(1);
+        morpho_supplyCollateral_clamped(collateralAssets, "");
+        morpho_borrow_clamped(borrowAssets, 0);
+        
+        // Manipulate oracle price to make position VERY unhealthy
+        // Severe price drop (90%) to ensure bad debt scenario
+        vm.prank(address(this));
+        oracle.setPrice(ORACLE_PRICE_SCALE / 10); // 90% price drop
+        
+        // Actor 0: Liquidate and fully seize all collateral to trigger bad debt
+        switchActor(0);
+        morpho_liquidate_clamped_badDebt("");
+    }
 
     /// @dev Shortcut to enable withdrawal by first supplying
     function shortcut_withdraw(uint256 supplyAssets, uint256 supplyShares, uint256 withdrawAssets, uint256 withdrawShares) public {
