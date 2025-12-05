@@ -7,7 +7,7 @@
 - **Contract**: CryticTester
 - **Signature**: `morpho_enableLltv(uint256)`
 - **Visibility**: public
-- **Source Range**: 1681:96:64
+- **Source Range**: 716:96:64
 - **Inherited From**: AdminTargets
 
 ## Implementation

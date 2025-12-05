@@ -7,7 +7,7 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_setFeeRecipient(address)`
 - **Visibility**: public
-- **Source Range**: 1929:128:64
+- **Source Range**: 964:128:64
 - **Inherited From**: AdminTargets
 
 ## Implementation

@@ -7,12 +7,13 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_enableIrm(address)`
 - **Visibility**: public
-- **Source Range**: 1583:92:64
+- **Source Range**: 618:92:64
 - **Inherited From**: AdminTargets
 
 ## Implementation
 
 ```solidity
+/// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
 function morpho_enableIrm(address irm) public asAdmin() {
     morpho.enableIrm(irm);
 }
@@ -48,3 +49,9 @@ modifier asAdmin() {
   └─ [1] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 1)
       💬 Args: [no args]
 ```
+
+## Documentation
+
+### Function Documentation
+
+CUSTOM TARGET FUNCTIONS - Add your own target functions here ///

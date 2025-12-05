@@ -7,7 +7,7 @@
 - **Contract**: CryticTester
 - **Signature**: `morpho_withdrawCollateral(struct MarketParams,uint256,address,address)`
 - **Visibility**: public
-- **Source Range**: 8244:258:67
+- **Source Range**: 3094:258:67
 - **Inherited From**: MorphoTargets
 
 ## Implementation

@@ -7,7 +7,7 @@
 - **Contract**: CryticTester
 - **Signature**: `morpho_setFee(struct MarketParams,uint256)`
 - **Visibility**: public
-- **Source Range**: 1783:140:64
+- **Source Range**: 818:140:64
 - **Inherited From**: AdminTargets
 
 ## Implementation

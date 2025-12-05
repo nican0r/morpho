@@ -7,7 +7,7 @@
 - **Contract**: CryticTester
 - **Signature**: `morpho_flashLoan(address,uint256,bytes)`
 - **Visibility**: public
-- **Source Range**: 6340:145:67
+- **Source Range**: 1190:145:67
 - **Inherited From**: MorphoTargets
 
 ## Implementation
