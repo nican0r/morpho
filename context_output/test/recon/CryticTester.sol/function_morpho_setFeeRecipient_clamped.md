@@ -7,18 +7,30 @@
 - **Contract**: CryticTester
 - **Signature**: `morpho_setFeeRecipient_clamped()`
 - **Visibility**: public
-- **Source Range**: 1273:109:64
+- **Source Range**: 1203:109:64
 - **Inherited From**: AdminTargets
 
 ## Implementation
 
 ```solidity
 function morpho_setFeeRecipient_clamped() public asAdmin() {
-    morpho.setFeeRecipient(_getActor());
+    morpho_setFeeRecipient(_getActor());
 }
 ```
 
 ## Related Implementations
+
+### morpho_setFeeRecipient(address)
+
+- **Kind**: internal
+- **Source**: 1859:128:64
+- **Link**: `test/recon/targets/AdminTargets.sol:AdminTargets:morpho_setFeeRecipient(address)`
+
+```solidity
+function morpho_setFeeRecipient(address newFeeRecipient) public asAdmin() {
+    morpho.setFeeRecipient(newFeeRecipient);
+}
+```
 
 ### _getActor()
 
@@ -48,10 +60,6 @@ modifier asAdmin() {
 }
 ```
 
-## External Calls
-
-- **Morpho::setFeeRecipient(address)**
-
 ## State Variable Reads
 
 - **_actor** (`address`)
@@ -62,9 +70,14 @@ modifier asAdmin() {
 ┌─ [0] ⚙️ FUNCTION: AdminTargets.morpho_setFeeRecipient_clamped() (NodeID: 0)
     💬 Args: [no args]
     👁️  Def: public
-  ├─ [1] ⚙️ FUNCTION: ActorManager._getActor() (NodeID: 1)
-  │   💬 Args: [no args]
-  │   👁️  Def: internal
-  └─ [1] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 2)
+  ├─ [1] ⚙️ FUNCTION: AdminTargets.morpho_setFeeRecipient(address) (NodeID: 1)
+  │   💬 Args: [_getActor()]
+  │   👁️  Def: public
+  │ ├─ [2] ⚙️ FUNCTION: ActorManager._getActor() (NodeID: 3)
+  │ │   💬 Args: [no args]
+  │ │   👁️  Def: internal
+  │ └─ [2] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 2)
+  │     💬 Args: [no args]
+  └─ [1] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 4)
       💬 Args: [no args]
 ```

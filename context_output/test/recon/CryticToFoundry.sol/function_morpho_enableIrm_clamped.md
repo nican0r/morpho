@@ -15,11 +15,23 @@
 ```solidity
 /// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
 function morpho_enableIrm_clamped() public asAdmin() {
-    morpho.enableIrm(address(irm));
+    morpho_enableIrm(address(irm));
 }
 ```
 
 ## Related Implementations
+
+### morpho_enableIrm(address)
+
+- **Kind**: internal
+- **Source**: 1513:92:64
+- **Link**: `test/recon/targets/AdminTargets.sol:AdminTargets:morpho_enableIrm(address)`
+
+```solidity
+function morpho_enableIrm(address irm) public asAdmin() {
+    morpho.enableIrm(irm);
+}
+```
 
 ### asAdmin()
 
@@ -36,17 +48,18 @@ modifier asAdmin() {
 }
 ```
 
-## External Calls
-
-- **Morpho::enableIrm(address)**
-
 ## Call Tree
 
 ```
 ┌─ [0] ⚙️ FUNCTION: AdminTargets.morpho_enableIrm_clamped() (NodeID: 0)
     💬 Args: [no args]
     👁️  Def: public
-  └─ [1] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 1)
+  ├─ [1] ⚙️ FUNCTION: AdminTargets.morpho_enableIrm(address) (NodeID: 1)
+  │   💬 Args: [address(irm)]
+  │   👁️  Def: public
+  │ └─ [2] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 2)
+  │     💬 Args: [no args]
+  └─ [1] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 3)
       💬 Args: [no args]
 ```
 

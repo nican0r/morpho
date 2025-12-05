@@ -973,16 +973,88 @@ function targetSenders() public view returns (address[] memory targetedSenders_)
 function targetInterfaces() public view returns (FuzzInterface[] memory targetedInterfaces_);
 ```
 
-### morpho_enableIrm(address) (inherited from AdminTargets)
+### morpho_enableIrm_clamped() (inherited from AdminTargets)
 
-- **Signature**: `morpho_enableIrm(address)`
+- **Signature**: `morpho_enableIrm_clamped()`
 - **Visibility**: public
-- **Source Range**: 618:92:64
-- **Details**: [function_morpho_enableIrm_address.md](./function_morpho_enableIrm_address.md)
+- **Source Range**: 597:98:64
+- **Details**: [function_morpho_enableIrm_clamped.md](./function_morpho_enableIrm_clamped.md)
 
 **Signature:**
 ```solidity
 /// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
+function morpho_enableIrm_clamped() public asAdmin();
+```
+
+### morpho_enableLltv_05_clamped() (inherited from AdminTargets)
+
+- **Signature**: `morpho_enableLltv_05_clamped()`
+- **Visibility**: public
+- **Source Range**: 762:97:64
+- **Details**: [function_morpho_enableLltv_05_clamped.md](./function_morpho_enableLltv_05_clamped.md)
+
+**Signature:**
+```solidity
+function morpho_enableLltv_05_clamped() public asAdmin();
+```
+
+### morpho_enableLltv_08_clamped() (inherited from AdminTargets)
+
+- **Signature**: `morpho_enableLltv_08_clamped()`
+- **Visibility**: public
+- **Source Range**: 865:97:64
+- **Details**: [function_morpho_enableLltv_08_clamped.md](./function_morpho_enableLltv_08_clamped.md)
+
+**Signature:**
+```solidity
+function morpho_enableLltv_08_clamped() public asAdmin();
+```
+
+### morpho_setFee_clamped(uint256) (inherited from AdminTargets)
+
+- **Signature**: `morpho_setFee_clamped(uint256)`
+- **Visibility**: public
+- **Source Range**: 1002:152:64
+- **Details**: [function_morpho_setFee_clamped_uint256.md](./function_morpho_setFee_clamped_uint256.md)
+
+**Signature:**
+```solidity
+function morpho_setFee_clamped(uint256 newFee) public asAdmin();
+```
+
+### morpho_setFeeRecipient_clamped() (inherited from AdminTargets)
+
+- **Signature**: `morpho_setFeeRecipient_clamped()`
+- **Visibility**: public
+- **Source Range**: 1203:109:64
+- **Details**: [function_morpho_setFeeRecipient_clamped.md](./function_morpho_setFeeRecipient_clamped.md)
+
+**Signature:**
+```solidity
+function morpho_setFeeRecipient_clamped() public asAdmin();
+```
+
+### morpho_setOwner_clamped() (inherited from AdminTargets)
+
+- **Signature**: `morpho_setOwner_clamped()`
+- **Visibility**: public
+- **Source Range**: 1354:95:64
+- **Details**: [function_morpho_setOwner_clamped.md](./function_morpho_setOwner_clamped.md)
+
+**Signature:**
+```solidity
+function morpho_setOwner_clamped() public asAdmin();
+```
+
+### morpho_enableIrm(address) (inherited from AdminTargets)
+
+- **Signature**: `morpho_enableIrm(address)`
+- **Visibility**: public
+- **Source Range**: 1513:92:64
+- **Details**: [function_morpho_enableIrm_address.md](./function_morpho_enableIrm_address.md)
+
+**Signature:**
+```solidity
 function morpho_enableIrm(address irm) public asAdmin();
 ```
 
@@ -990,7 +1062,7 @@ function morpho_enableIrm(address irm) public asAdmin();
 
 - **Signature**: `morpho_enableLltv(uint256)`
 - **Visibility**: public
-- **Source Range**: 716:96:64
+- **Source Range**: 1611:96:64
 - **Details**: [function_morpho_enableLltv_uint256.md](./function_morpho_enableLltv_uint256.md)
 
 **Signature:**
@@ -1002,7 +1074,7 @@ function morpho_enableLltv(uint256 lltv) public asAdmin();
 
 - **Signature**: `morpho_setFee(struct MarketParams,uint256)`
 - **Visibility**: public
-- **Source Range**: 818:140:64
+- **Source Range**: 1713:140:64
 - **Details**: [function_morpho_setFee_struct_MarketParams_uint256.md](./function_morpho_setFee_struct_MarketParams_uint256.md)
 
 **Signature:**
@@ -1014,7 +1086,7 @@ function morpho_setFee(MarketParams memory marketParams, uint256 newFee) public 
 
 - **Signature**: `morpho_setFeeRecipient(address)`
 - **Visibility**: public
-- **Source Range**: 964:128:64
+- **Source Range**: 1859:128:64
 - **Details**: [function_morpho_setFeeRecipient_address.md](./function_morpho_setFeeRecipient_address.md)
 
 **Signature:**
@@ -1026,12 +1098,64 @@ function morpho_setFeeRecipient(address newFeeRecipient) public asAdmin();
 
 - **Signature**: `morpho_setOwner(address)`
 - **Visibility**: public
-- **Source Range**: 1098:100:64
+- **Source Range**: 1993:100:64
 - **Details**: [function_morpho_setOwner_address.md](./function_morpho_setOwner_address.md)
 
 **Signature:**
 ```solidity
 function morpho_setOwner(address newOwner) public asAdmin();
+```
+
+### oracle_decreasePrice(uint256) (inherited from DoomsdayTargets)
+
+- **Signature**: `oracle_decreasePrice(uint256)`
+- **Visibility**: public
+- **Source Range**: 647:529:65
+- **Details**: [function_oracle_decreasePrice_uint256.md](./function_oracle_decreasePrice_uint256.md)
+
+**Signature:**
+```solidity
+/// @dev Manipulate oracle price to make positions unhealthy (enables liquidation)
+function oracle_decreasePrice(uint256 priceDropPercentage) public;
+```
+
+### oracle_setPrice(uint256) (inherited from DoomsdayTargets)
+
+- **Signature**: `oracle_setPrice(uint256)`
+- **Visibility**: public
+- **Source Range**: 1236:258:65
+- **Details**: [function_oracle_setPrice_uint256.md](./function_oracle_setPrice_uint256.md)
+
+**Signature:**
+```solidity
+/// @dev Set oracle price to a specific value
+function oracle_setPrice(uint256 price) public;
+```
+
+### oracle_crashPrice() (inherited from DoomsdayTargets)
+
+- **Signature**: `oracle_crashPrice()`
+- **Visibility**: public
+- **Source Range**: 1573:188:65
+- **Details**: [function_oracle_crashPrice.md](./function_oracle_crashPrice.md)
+
+**Signature:**
+```solidity
+/// @dev Drastically decrease price to create bad debt scenarios
+function oracle_crashPrice() public;
+```
+
+### oracle_increasePrice(uint256) (inherited from DoomsdayTargets)
+
+- **Signature**: `oracle_increasePrice(uint256)`
+- **Visibility**: public
+- **Source Range**: 1834:448:65
+- **Details**: [function_oracle_increasePrice_uint256.md](./function_oracle_increasePrice_uint256.md)
+
+**Signature:**
+```solidity
+/// @dev Increase oracle price (makes positions healthier)
+function oracle_increasePrice(uint256 priceIncreasePercentage) public;
 ```
 
 ### switchActor(uint256) (inherited from ManagersTargets)

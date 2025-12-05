@@ -7,7 +7,7 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_enableLltv(uint256)`
 - **Visibility**: public
-- **Source Range**: 716:96:64
+- **Source Range**: 1611:96:64
 - **Inherited From**: AdminTargets
 
 ## Implementation

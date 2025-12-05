@@ -7,33 +7,29 @@
 - **Contract**: CryticToFoundry
 - **Signature**: `morpho_setFee_clamped(uint256)`
 - **Visibility**: public
-- **Source Range**: 1047:177:64
+- **Source Range**: 1002:152:64
 - **Inherited From**: AdminTargets
 
 ## Implementation
 
 ```solidity
-function morpho_setFee_clamped(uint256 newFee_) public asAdmin() {
-    uint256 newFee = between(newFee_, 0, MAX_FEE);
-    morpho.setFee(defaultMarketParams, newFee);
+function morpho_setFee_clamped(uint256 newFee) public asAdmin() {
+    newFee %= MAX_FEE + 1;
+    morpho_setFee(defaultMarketParams, newFee);
 }
 ```
 
 ## Related Implementations
 
-### between(uint256,uint256,uint256)
+### morpho_setFee(struct MarketParams,uint256)
 
 - **Kind**: internal
-- **Source**: 933:269:5
-- **Link**: `lib/chimera/src/FoundryAsserts.sol:FoundryAsserts:between(uint256,uint256,uint256)`
+- **Source**: 1713:140:64
+- **Link**: `test/recon/targets/AdminTargets.sol:AdminTargets:morpho_setFee(struct MarketParams,uint256)`
 
 ```solidity
-function between(uint256 value, uint256 low, uint256 high) virtual override internal returns (uint256) {
-    if ((value < low) || (value > high)) {
-        uint256 ans = low + (value % ((high - low) + 1));
-        return ans;
-    }
-    return value;
+function morpho_setFee(MarketParams memory marketParams, uint256 newFee) public asAdmin() {
+    morpho.setFee(marketParams, newFee);
 }
 ```
 
@@ -52,19 +48,17 @@ modifier asAdmin() {
 }
 ```
 
-## External Calls
-
-- **Morpho::setFee(struct MarketParams,uint256)**
-
 ## Call Tree
 
 ```
 ┌─ [0] ⚙️ FUNCTION: AdminTargets.morpho_setFee_clamped(uint256) (NodeID: 0)
     💬 Args: [no args]
     👁️  Def: public
-  ├─ [1] ⚙️ FUNCTION: FoundryAsserts.between(uint256,uint256,uint256) (NodeID: 1)
-  │   💬 Args: [newFee_, 0, MAX_FEE]
-  │   👁️  Def: internal
-  └─ [1] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 2)
+  ├─ [1] ⚙️ FUNCTION: AdminTargets.morpho_setFee(struct MarketParams,uint256) (NodeID: 1)
+  │   💬 Args: [defaultMarketParams, newFee]
+  │   👁️  Def: public
+  │ └─ [2] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 2)
+  │     💬 Args: [no args]
+  └─ [1] 🔒 MODIFIER: Setup.asAdmin() (NodeID: 3)
       💬 Args: [no args]
 ```
