@@ -1,0 +1,99 @@
+{
+  "timestamp": "1764911170",
+  "lcov_file": "echidna/covered.1764911170.lcov",
+  "missing_coverage": {
+    "liquidate": {
+      "contract": "Morpho",
+      "source_file": "/Users/nelsonpereira/Documents/GitHub/Auditing/Fuzzing/Recon_Fuzzing/Morpho/morpho-blue/src/Morpho.sol",
+      "function_range": {
+        "start": 347,
+        "end": 417
+      },
+      "coverage_stats": {
+        "total_lines": 30,
+        "covered_lines": 23,
+        "uncovered_lines": 7,
+        "percentage": 76.67
+      },
+      "uncovered_code": [
+        {
+          "line_range": "393",
+          "code": [
+            "393:             badDebtShares = position[id][borrower].borrowShares;"
+          ]
+        },
+        {
+          "line_range": "395-396",
+          "code": [
+            "395:                 market[id].totalBorrowAssets,",
+            "396:                 badDebtShares.toAssetsUp(market[id].totalBorrowAssets, market[id].totalBorrowShares)"
+          ]
+        },
+        {
+          "line_range": "399-402",
+          "code": [
+            "399:             market[id].totalBorrowAssets -= badDebtAssets.toUint128();",
+            "400:             market[id].totalSupplyAssets -= badDebtAssets.toUint128();",
+            "401:             market[id].totalBorrowShares -= badDebtShares.toUint128();",
+            "402:             position[id][borrower].borrowShares = 0;"
+          ]
+        }
+      ]
+    },
+    "repay": {
+      "contract": "Morpho",
+      "source_file": "/Users/nelsonpereira/Documents/GitHub/Auditing/Fuzzing/Recon_Fuzzing/Morpho/morpho-blue/src/Morpho.sol",
+      "function_range": {
+        "start": 269,
+        "end": 298
+      },
+      "coverage_stats": {
+        "total_lines": 12,
+        "covered_lines": 11,
+        "uncovered_lines": 1,
+        "percentage": 91.67
+      },
+      "uncovered_code": [
+        {
+          "line_range": "295",
+          "code": [
+            "295:         IERC20(marketParams.loanToken).safeTransferFrom(msg.sender, address(this), assets);"
+          ]
+        }
+      ]
+    },
+    "setAuthorizationWithSig": {
+      "contract": "Morpho",
+      "source_file": "/Users/nelsonpereira/Documents/GitHub/Auditing/Fuzzing/Recon_Fuzzing/Morpho/morpho-blue/src/Morpho.sol",
+      "function_range": {
+        "start": 446,
+        "end": 464
+      },
+      "coverage_stats": {
+        "total_lines": 9,
+        "covered_lines": 7,
+        "uncovered_lines": 2,
+        "percentage": 77.78
+      },
+      "uncovered_code": [
+        {
+          "line_range": "457",
+          "code": [
+            "457:         emit EventsLib.IncrementNonce(msg.sender, authorization.authorizer, authorization.nonce);"
+          ]
+        },
+        {
+          "line_range": "459",
+          "code": [
+            "459:         isAuthorized[authorization.authorizer][authorization.authorized] = authorization.isAuthorized;"
+          ]
+        }
+      ]
+    }
+  },
+  "summary": {
+    "functions_analyzed": 20,
+    "functions_with_missing_coverage": 3,
+    "full_coverage": false
+  }
+}
