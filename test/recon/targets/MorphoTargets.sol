@@ -170,6 +170,43 @@ abstract contract MorphoTargets is BaseTargetFunctions, Properties {
         morpho_withdrawCollateral(defaultMarketParams, assets, onBehalf, _getActor());
     }
 
+    // View function handlers to improve coverage
+    function morpho_feeRecipient() public view {
+        morpho.feeRecipient();
+    }
+
+    function morpho_market_clamped() public view {
+        morpho.market(defaultMarketId);
+    }
+
+    function morpho_isIrmEnabled_clamped() public view {
+        morpho.isIrmEnabled(address(irm));
+    }
+
+    function morpho_isLltvEnabled_clamped() public view {
+        morpho.isLltvEnabled(0.8e18);
+    }
+
+    function morpho_isAuthorized_clamped() public view {
+        address authorizer = _getActor();
+        address authorized = _getActor();
+        morpho.isAuthorized(authorizer, authorized);
+    }
+
+    function morpho_idToMarketParams_clamped() public view {
+        morpho.idToMarketParams(defaultMarketId);
+    }
+
+    function morpho_extSloads_clamped() public view {
+        // Create an array of storage slots to read
+        bytes32[] memory slots = new bytes32[](3);
+        // Read some meaningful slots (e.g., owner, feeRecipient, and a market slot)
+        slots[0] = bytes32(uint256(0)); // owner slot
+        slots[1] = bytes32(uint256(1)); // feeRecipient slot
+        slots[2] = bytes32(uint256(2)); // position mapping slot
+        morpho.extSloads(slots);
+    }
+
     /// AUTO GENERATED TARGET FUNCTIONS - WARNING: DO NOT DELETE OR MODIFY THIS LINE ///
 
     function morpho_accrueInterest(MarketParams memory marketParams) public asActor {
