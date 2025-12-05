@@ -12,6 +12,7 @@ import {Panic} from "@recon/Panic.sol";
 
 import "src/Morpho.sol";
 import {ERC20Mock} from "src/mocks/ERC20Mock.sol";
+import {AUTHORIZATION_TYPEHASH} from "src/libraries/ConstantsLib.sol";
 
 abstract contract MorphoTargets is BaseTargetFunctions, Properties {
     /// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
@@ -53,6 +54,16 @@ abstract contract MorphoTargets is BaseTargetFunctions, Properties {
         morpho_liquidate(defaultMarketParams, borrower, seizedAssets, repaidShares, data);
     }
 
+    // Clamped handler for liquidate - seize all collateral to trigger bad debt branch
+    function morpho_liquidate_full_seizure_clamped(uint256 repaidShares, bytes memory data) public {
+        address borrower = _getActor();
+        (, uint128 borrowerBorrowShares, uint128 borrowerCollateral) = morpho.position(defaultMarketId, borrower);
+        // Seize exactly all collateral to trigger the bad debt handling at line 392
+        uint256 seizedAssets = borrowerCollateral;
+        repaidShares %= borrowerBorrowShares + 1;
+        morpho_liquidate(defaultMarketParams, borrower, seizedAssets, repaidShares, data);
+    }
+
     // Clamped handler for repay
     function morpho_repay_clamped(uint256 assets, uint256 shares, bytes memory data) public {
         address onBehalf = _getActor();
@@ -60,6 +71,16 @@ abstract contract MorphoTargets is BaseTargetFunctions, Properties {
         assets %= ERC20Mock(defaultMarketParams.loanToken).balanceOf(_getActor()) + 1;
         shares %= borrowShares + 1;
         morpho_repay(defaultMarketParams, assets, shares, onBehalf, data);
+    }
+
+    // Clamped handler for repay without callback - to cover line 295
+    function morpho_repay_no_callback_clamped(uint256 assets, uint256 shares) public {
+        address onBehalf = _getActor();
+        (, uint128 borrowShares, ) = morpho.position(defaultMarketId, onBehalf);
+        assets %= ERC20Mock(defaultMarketParams.loanToken).balanceOf(_getActor()) + 1;
+        shares %= borrowShares + 1;
+        // Pass empty data to skip callback and hit line 295 directly
+        morpho_repay(defaultMarketParams, assets, shares, onBehalf, "");
     }
 
     // Clamped handler for setAuthorization
@@ -80,6 +101,40 @@ abstract contract MorphoTargets is BaseTargetFunctions, Properties {
             deadline: deadline
         });
         morpho_setAuthorizationWithSig(authorization, signature);
+    }
+
+    // Clamped handler for setAuthorizationWithSig with valid signature
+    function morpho_setAuthorizationWithSig_valid_clamped(bool isAuthorized, uint256 privateKeyIndex) public {
+        // Use a deterministic private key based on actor index
+        // privateKey must be in range [1, secp256k1 curve order)
+        uint256 privateKey = 1 + (privateKeyIndex % 10); // Use keys 1-10
+        address authorizer = vm.addr(privateKey);
+        address authorized = _getActor();
+        uint256 nonce = morpho.nonce(authorizer);
+        
+        // Clamp deadline to be valid (current block timestamp or later)
+        uint256 deadline = block.timestamp + 1 hours;
+        
+        Authorization memory authorization = Authorization({
+            authorizer: authorizer,
+            authorized: authorized,
+            isAuthorized: isAuthorized,
+            nonce: nonce,
+            deadline: deadline
+        });
+
+        // Generate valid signature
+        bytes32 hashStruct = keccak256(abi.encode(
+            AUTHORIZATION_TYPEHASH,
+            authorization
+        ));
+        bytes32 digest = keccak256(bytes.concat("\x19\x01", morpho.DOMAIN_SEPARATOR(), hashStruct));
+        
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(privateKey, digest);
+        Signature memory signature = Signature({v: v, r: r, s: s});
+
+        // Execute without prank since we need msg.sender to be anyone, authorizer is in the signature
+        morpho.setAuthorizationWithSig(authorization, signature);
     }
 
     // Clamped handler for supply
