@@ -1,0 +1,24 @@
+[
+  {
+    "contract": "Morpho",
+    "target_functions": [
+      "accrueInterest",
+      "borrow",
+      "createMarket",
+      "enableIrm",
+      "enableLltv",
+      "flashLoan",
+      "liquidate",
+      "repay",
+      "setAuthorization",
+      "setAuthorizationWithSig",
+      "setFee",
+      "setFeeRecipient",
+      "setOwner",
+      "supply",
+      "supplyCollateral",
+      "withdraw",
+      "withdrawCollateral"
+    ]
+  }
+]
