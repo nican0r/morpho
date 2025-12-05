@@ -1,0 +1,26 @@
+{
+  "Morpho": {
+    "functions_to_cover": [
+      "_accrueInterest",
+      "_isHealthy",
+      "_isSenderAuthorized",
+      "accrueInterest",
+      "borrow",
+      "createMarket",
+      "enableIrm",
+      "enableLltv",
+      "flashLoan",
+      "liquidate",
+      "repay",
+      "setAuthorization",
+      "setAuthorizationWithSig",
+      "setFee",
+      "setFeeRecipient",
+      "setOwner",
+      "supply",
+      "supplyCollateral",
+      "withdraw",
+      "withdrawCollateral"
+    ]
+  }
+}
