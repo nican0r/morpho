@@ -28,11 +28,11 @@ abstract contract Setup is BaseSetup, ActorManager, AssetManager, Utils {
     uint256 internal constant DECIMALS = 18;
 
     // Core contracts
-    Morpho morpho;
-    ERC20Mock loanToken;
-    ERC20Mock collateralToken;
-    OracleMock oracle;
-    IrmMock irm;
+    Morpho public morpho;
+    ERC20Mock public loanToken;
+    ERC20Mock public collateralToken;
+    OracleMock public oracle;
+    IrmMock public irm;
 
     // Market configuration
     MarketParams defaultMarketParams;
@@ -114,12 +114,12 @@ abstract contract Setup is BaseSetup, ActorManager, AssetManager, Utils {
     /// === MODIFIERS === ///
     /// Prank admin and actor
 
-    modifier asAdmin {
+    modifier asAdmin() {
         vm.prank(address(this));
         _;
     }
 
-    modifier asActor {
+    modifier asActor() {
         vm.prank(address(_getActor()));
         _;
     }
