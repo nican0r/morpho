@@ -5,8 +5,8 @@
 	path = lib/halmos-cheatcodes
 	url = https://github.com/a16z/halmos-cheatcodes.git
 [submodule "lib/chimera"]
-	path = chimera
+	path = lib/chimera
 	url = https://github.com/Recon-Fuzz/chimera
 [submodule "lib/setup-helpers"]
-	path = setup-helpers
+	path = lib/setup-helpers
 	url = https://github.com/Recon-Fuzz/setup-helpers
